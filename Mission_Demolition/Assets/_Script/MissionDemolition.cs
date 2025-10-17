@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+
 
 public enum GameMode
 {                                                            
@@ -11,13 +13,13 @@ public enum GameMode
 
   public class MissionDemolition : MonoBehaviour
 {
-      static private MissionDemolition S;                   
+      static private MissionDemolition S;    //Slingleton
  
       [Header("Inscribed")]
-      public TextMeshProGUI uitLevel;  
-      public TextMeshProGUI uitShots;  
-      public Vector3 castlePos; 
-      public GameObject[] castles;   
+      public TextMeshProUGUI uitLevel;  //current level
+      public TextMeshProUGUI uitShots;  //shots taken
+      public Vector3 castlePos;        //where to place castles
+      public GameObject[] castles;   //array of castles
  
       [Header("Dynamic")]
       public int level;     // The current level
@@ -64,7 +66,7 @@ public enum GameMode
       {
          // Show the data in the GUITexts
          uitLevel.text = "Level: " + (level + 1) + " of " + levelMax;
-         uitShots.text = "Shots Taken: " + shotsTaken;
+         uitShots.text = "Shots: " + shotsTaken;
       }
  
 
@@ -73,7 +75,7 @@ public enum GameMode
          UpdateGUI();
 
          // Check for level end
-         if ((mode == GameMode.playing) && Goal.goalMet)
+         if ((mode == GameMode.playing) && (Goal.goalMet))
          {
              // Change mode to stop checking for level end
              mode = GameMode.levelEnd;
